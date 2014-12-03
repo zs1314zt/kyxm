@@ -1,0 +1,28 @@
+ul{
+list-style:none;
+}
+.webheader{
+background:url(../images/banner.png) no-repeat;;
+height:165px;
+
+}
+.content{
+
+
+}
+.content_left{
+
+width:200px;
+
+}
+
+.content_right{
+
+}
+.tail{
+background:#214e92;
+height:30px;
+}
+.tail p{
+text-align:center;
+}
