@@ -2,6 +2,8 @@
     require_once("./includes/session.php");
     require_once("./includes/connectDB.php");
 
+    echo "ok";
+
     if(isset($_POST['username'])){
         $usercode = $_POST['usercode'];
         $password = $_POST['password'];
