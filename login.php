@@ -1,6 +1,6 @@
 <?php
-    require_once("/includes/session.php");
-    require_once("/include/connectDB.php");
+    require_once("./includes/session.php");
+    require_once("./includes/connectDB.php");
 
     if(isset($_POST['username'])){
         $usercode = $_POST['usercode'];
@@ -21,7 +21,7 @@
         }else{
             echo "用户名或密码不正确";
         }
-}
+    }
 ?>
 
 <!DOCTYPE html>
@@ -80,7 +80,7 @@
     </div>
     </form>
     <?php
-       include ("includes/closeDB");
+       include ("./includes/closeDB");
     ?>
 </body>
 </html>
