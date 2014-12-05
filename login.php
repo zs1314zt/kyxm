@@ -1,29 +1,6 @@
 <?php
-    require_once("./includes/session.php");
-    require_once("./includes/connectDB.php");
-
-    echo "ok";
-
-    if(isset($_POST['username'])){
-        $usercode = $_POST['usercode'];
-        $password = $_POST['password'];
-
-        $query = "select user_id, username from user where usercode= ? and password = ? limit 1";
-
-        $statement = $con->prepare($query);
-        $statement->bind_param('ss', $username, $password);
-
-        $statement->execute();
-        $statement->store_result();
-
-        if($statement->num_rows == 1){
-            $statement->bind_result($_SESSION['userid'], $_SESSION['username']);
-            $statement->fetch();
-            header("Location:index.php");
-        }else{
-            echo "用户名或密码不正确";
-        }
-    }
+    require_once("includes/session.php");
+    require_once("includes/connectDB.php");
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +10,31 @@
     <link href="css/alogin.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <form id="form" action="login.php">
+    <?php
+
+    if(isset($_POST['usercode'])){
+        $usercode = $_POST['usercode'];
+        $password = $_POST['password'];
+
+        $query = "select user_id, user_name from user where user_code= ? and user_pass = ? limit 1";
+
+        $statement = $con->prepare($query);
+        $statement->bind_param('ss', $usercode, $password);
+
+        $statement->execute();
+        $statement->store_result();
+
+        if($statement->num_rows == 1){
+            $statement->bind_result($_SESSION['user_id'], $_SESSION['user_name']);
+            $statement->fetch();
+            header("Location: index.php");
+        }else{
+            echo "用户名或密码不正确";
+        }
+    }
+
+    ?>
+    <form id="form" action="login.php" method="post">
     <div class="Main">
         <ul>
             <li class="top"></li>
@@ -81,8 +82,9 @@
         </ul>
     </div>
     </form>
+
     <?php
-       include ("./includes/closeDB");
+        include ("includes/closeDB");
     ?>
 </body>
 </html>
