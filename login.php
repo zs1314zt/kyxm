@@ -12,6 +12,8 @@
 <body>
     <?php
 
+    $errorMessage = NULL;
+
     if(isset($_POST['usercode'])){
         $usercode = $_POST['usercode'];
         $password = $_POST['password'];
@@ -29,7 +31,7 @@
             $statement->fetch();
             header("Location: index.php");
         }else{
-            echo "用户名或密码不正确";
+            $errorMessage = "用户名或密码错误";
         }
     }
 
@@ -56,12 +58,15 @@
                             <input id="password" name="password" type="text" class="txt" />  
                         </span>
                     </li>
-                    <!--
+                    
                     <li>
-                        <span class="left">记住我：</span>
-                        <input id="Checkbox1" type="checkbox" />
+                        <span>
+                            <?php
+                                echo $errorMessage;  
+                            ?>
+                        </span>
                     </li>
-                    -->
+                   
                 </ul>
             </li>
             <li class="topE"></li>
