@@ -22,7 +22,7 @@
 <body>
     <div id="cc" class="easyui-layout" style="width:100%;height:650px;">
         <div data-options="region:'north'" style="height:105px"><img src="images/index/logo.png"/></div>
-        <div data-options="region:'south',split:true" style="height:50px;"></div>
+        <div data-options="region:'south',split:true" style="height:50px;"><footer><p>copyright@杭州电子科技大学 2014</p></footer></div>
         <div data-options="region:'east',split:true" title="East" style="width:100px;"></div>
         <div data-options="region:'west',split:true" title="West" style="width:207px;">
 		<ul id="expmenu-freebie">
@@ -35,8 +35,8 @@
 							<span class="arrow up"></span>
 						</div>
 						<ul class="left_menu">
-							<li>项目查询</li>
-							<li class="selected">项目申报</li>
+							<li class="selected">项目查询</li>
+							<li>项目申报</li>
 							<li>项目进度</li>
 							<li>项目经费</li>
 							<li>项目成果</li>
@@ -48,7 +48,7 @@
 							<span class="arrow up"></span>
 						</div>
 						<ul class="left_menu">
-							<li class="selected">项目查询</li>
+							<li>项目查询</li>
 							<li>项目进度</li>
 							<li>项目成果</li>
 						</ul>
@@ -120,6 +120,12 @@
         function removePanel(){
             $('#cc').layout('remove', $('#region').val());
         }
+
+
+
+		$(window).load(function(){
+			$("div[class='panel-title']").text(" ");
+		})
     </script>
 </body>
 </html>
