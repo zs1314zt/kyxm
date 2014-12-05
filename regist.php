@@ -4,13 +4,13 @@
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head>
     <meta charset="utf-8"/>
     <title>科研项目管理系统注册</title>
     <link href="css/alogin.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="form1">
     <div class="Main">
         <ul>
             <li class="top"></li>

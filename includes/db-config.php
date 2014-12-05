@@ -3,6 +3,6 @@
     define("DB_NAME", "kyxm");
     define("DB_HOST", "localhost");
     define("DB_USER", "root");
-    define("DB_PASS", "zs1314zt");
+    define("DB_PASS", "901102");
 ?>
 
