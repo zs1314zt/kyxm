@@ -1,6 +1,7 @@
 <?php
-    require_once("includes/session.php");
-    require_once("includes/connectDB.php");
+    include_once("includes/session.php");
+    include_once("includes/connectDB.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +56,7 @@
                     </li>
                     <li><span class="left">ÃÜ Âë£º</span> 
                         <span class="left">
-                            <input id="password" name="password" type="text" class="txt" />  
+                            <input id="password" name="password" type="password" class="txt" />  
                         </span>
                     </li>
                     
@@ -65,6 +66,7 @@
                                 echo $errorMessage;  
                             ?>
                         </span>
+                        
                     </li>
                    
                 </ul>
@@ -74,10 +76,10 @@
             <li class="middle_B"></li>
             <li class="middle_C">
                 <span class="btn">
-                    <input type="submit" value="" style="background-image:url(images/login/btnlogin.gif); width: 34%; height: 40%; background-repeat: no-repeat;"/>
+                    <input type="submit" value="" style="background-image:url(images/login/loginbtn.png); width: 30%; height: 36%; background-repeat: no-repeat;"/>
                     <!--<img alt="" src="images/login/btnlogin.gif" />-->
                 </span>
-                
+                <a href="regist.php">Ã»ÕËºÅ£¿È¥×¢²á£¡</a>
             </li>
             <li class="middle_D"></li>
             <li class="bottom_A"></li>

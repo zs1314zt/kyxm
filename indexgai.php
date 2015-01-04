@@ -1,9 +1,8 @@
 <?php
     include("includes\connectDB.php");
-    include_once("includes/session.php");
+
    /* function f_getprojectmessage($con){
-        //$result=array([id]=>
-        ("projectname"=>NULL,"applystatus"=>NULL,"projectfunts"=>NULL,"projectdesc"=>NULL,"achievename"=>NULL));
+        //$result=array([id]=>array("projectname"=>NULL,"applystatus"=>NULL,"projectfunts"=>NULL,"projectdesc"=>NULL,"achievename"=>NULL));
        /* $sql="SELECT p.project_name  
         ,ap.apply_status,p.project_funds,ps.progress_value,p.project_desc,ac.achieve_name
               FROM project p
@@ -50,40 +49,19 @@
           } 
            echo "bbbbb";*/
             /* bind parameters for markers */
-            $fromdate='2001-01-01';
-            $todate='2100-01-01';
-            $applystatus='all';
-            if(isset($_POST['fromdate'])){
-                $fromdate=$_POST['fromdate'];
-                $todate=$_POST['todate'];
-                $applystatus=$_POST['applystatus'];
-                 
-
-            }
+            echo '12345';
+            echo $_POST["fromdate"]; 
+            echo $_POST["applystatus"];
             function getProjectMessage($con){
-            
-            $num=$_SESSION['user_id'];
-            
-            global $fromdate,$todate,$applystatus;
-           
-            if($applystatus=='all'){
+             $num='2';
             $stmt  =  $con -> prepare ( "SELECT p.project_name,ap.apply_status,p.project_desc,ps.progress_value,ap.apply_date,ac.achieve_name
                       FROM project p
                       LEFT JOIN apply ap ON p.`apply_id`=ap.`apply_id` 
                       LEFT JOIN progress ps ON p.project_id=ps.project_id
                       LEFT JOIN achieve ac ON p.`project_id`=ac.`project_id`
-                      WHERE ap.`apply_date`<? AND ap.`apply_date`>? AND p.`user_id`=?" );
-            $stmt->bind_param("sss",$todate,$fromdate,$num);
-            }
-            else{
-            $stmt  =  $con -> prepare ( "SELECT p.project_name,ap.apply_status,p.project_desc,ps.progress_value,ap.apply_date,ac.achieve_name
-                      FROM project p
-                      LEFT JOIN apply ap ON p.`apply_id`=ap.`apply_id` 
-                      LEFT JOIN progress ps ON p.project_id=ps.project_id
-                      LEFT JOIN achieve ac ON p.`project_id`=ac.`project_id`
-                      WHERE ap.`apply_date`<? AND ap.`apply_date`>?  AND ap.apply_status=? AND p.`user_id`=?" );
-            $stmt->bind_param("ssss",$todate,$fromdate,$applystatus,$num);
-            }
+                      WHERE p.`user_id`=?" );
+            $stmt->bind_param("s", $num);
+
             /* execute query */
             $stmt->execute();
 
@@ -98,12 +76,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>科研所</title>
 
     
     <link rel="stylesheet" href="css/styles.css" type="text/css" />
-    <link rel="stylesheet" href="css/main.css" type="text/css" />
 	<link rel="stylesheet" href="css/jquery-tool.css" type="text/css" />
 
 
@@ -115,17 +92,17 @@
 
     <script type="text/javascript" src="js/jquery.tools.min.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="jqueryeasyui/easyui-lang-zh_CN.js"></script>
+
 </head>
 <body>
     <div id="cc" class="easyui-layout" style="width:100%;height:650px;">
         <div data-options="region:'north'" style="height:105px"><img src="images/index/logo.png"/></div>
-        <div data-options="region:'south',split:true" style="height:50px;"><p id="tail">copyright@杭州电子科技大学 2014</p></div>
+        <div data-options="region:'south',split:true" style="height:50px;"><footer><p>copyright@杭州电子科技大学 2014</p></footer></div>
         <div data-options="region:'east',split:true" title="通知公告" style="width:200px;">
-        <ul class="notice">
-        <li >通知公告啊啊啊啊啊啊</li>
-        <li >通知公告啊啊啊啊啊啊</li>
-        <li >通知公告啊啊啊啊啊啊</li>
+        <ul>
+        <li>通知公告啊啊啊啊啊啊</li>
+        <li>通知公告啊啊啊啊啊啊</li>
+        <li>通知公告啊啊啊啊啊啊</li>
         </ul>
         </div><!--eneast-->
         
@@ -141,10 +118,10 @@
 						</div>
 						<ul class="left_menu">
 							<li class="selected">项目查询</li>
-							<a href="apply.php"><li>项目申报</li></a>
+							<li>项目申报</li>
 							<li>项目进度</li>
 							<li>项目经费</li>
-							<a href="achieve.php"><li>项目成果</li></a>
+							<li>项目成果</li>
 						</ul>
 					</li>
 					<li>
@@ -170,29 +147,15 @@
 		</ul>
 		</div><!--endwest-->
         <div data-options="region:'center',title:'我的项目->项目查询'">
-            <form action="index.php" method="post">
-            <div id="tb" style="padding:2px 5px;">
-                申请时间 From: <input name="fromdate" class="easyui-datebox" style="width:110px">
-                To: <input name="todate" class="easyui-datebox" style="width:110px">
-                项目状态: 
-                <select name="applystatus" class="easyui-combobox" panelHeight="auto" style="width:100px">
-                    <option value="all">所有状态</option>
-                    <option value="00">未审批</option>
-                    <option value="10">审批未通过</option>
-                    <option value="01">已审批通过</option>
-                </select>
-               <button name="Submit" type="submit"> <a  class="easyui-linkbutton" iconCls="icon-search">搜索</a></button>
-            </div>
-            </form>
 		
 	<table class="easyui-datagrid" title="" style="width:100%;height:100%"
-            >
+            data-options="rownumbers:true,singleSelect:true,url:'datagrid_data1.json',method:'get',toolbar:'#tb',footer:'#ft'">
         <thead>
             <tr>
                 <th data-options="field:'itemid',width:120">项目名称</th>
                 <th data-options="field:'productid',width:100">项目审批状态</th>
                 <th data-options="field:'listprice',width:100">申请时间</th>
-                <th data-options="field:'progressvalue',width:120">项目进度</th>
+                <th data-options="field:'attr1',width:120">项目进度</th>
                 <th data-options="field:'unitcost',width:352">项目描述</th>
                 <th data-options="field:'attr1',width:120">项目成果</th>
             </tr>
@@ -235,8 +198,20 @@
                 <td>项目成果1</td>
             </tr>-->
     </table>
-    
-            
+     <form action="test.php" method="post">
+    <div id="tb" style="padding:2px 5px;">
+        申请时间 From: <input name="fromdate" class="easyui-datebox" style="width:110px">
+        To: <input name="todate" class="easyui-datebox" style="width:110px">
+        项目状态: 
+        <select name="applystatus" class="easyui-combobox" panelHeight="auto" style="width:100px">
+            <option value="all">所有状态</option>
+            <option value="00">未审批</option>
+            <option value="10">审批未通过</option>
+            <option value="01">已审批通过</option>
+        </select>
+       <button name="Submit" type="submit"> <a  class="easyui-linkbutton" iconCls="icon-search">搜索</a></button>
+    </div>
+    </form>
             
     <div id="ft" style="padding:2px 5px;">
         <a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true"></a>

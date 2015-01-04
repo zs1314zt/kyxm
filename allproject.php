@@ -50,8 +50,8 @@
           } 
            echo "bbbbb";*/
             /* bind parameters for markers */
-            $fromdate='2001-01-01';
-            $todate='2100-01-01';
+            $fromdate='20010101';
+            $todate='21000101';
             $applystatus='all';
             if(isset($_POST['fromdate'])){
                 $fromdate=$_POST['fromdate'];
@@ -115,7 +115,7 @@
 
     <script type="text/javascript" src="js/jquery.tools.min.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="jqueryeasyui/easyui-lang-zh_CN.js"></script>
+
 </head>
 <body>
     <div id="cc" class="easyui-layout" style="width:100%;height:650px;">
@@ -140,8 +140,8 @@
 							<span class="arrow up"></span>
 						</div>
 						<ul class="left_menu">
-							<li class="selected">项目查询</li>
-							<a href="apply.php"><li>项目申报</li></a>
+							<li>项目查询</li>
+							<li>项目申报</li>
 							<li>项目进度</li>
 							<li>项目经费</li>
 							<a href="achieve.php"><li>项目成果</li></a>
@@ -153,7 +153,7 @@
 							<span class="arrow up"></span>
 						</div>
 						<ul class="left_menu">
-							<li>项目查询</li>
+							<li class="selected">项目查询</li>
 							<li>项目进度</li>
 							<li>项目成果</li>
 						</ul>
@@ -169,7 +169,7 @@
 			</li>
 		</ul>
 		</div><!--endwest-->
-        <div data-options="region:'center',title:'我的项目->项目查询'">
+        <div data-options="region:'center',title:'所有项目->项目查询'">
             <form action="index.php" method="post">
             <div id="tb" style="padding:2px 5px;">
                 申请时间 From: <input name="fromdate" class="easyui-datebox" style="width:110px">
@@ -192,7 +192,7 @@
                 <th data-options="field:'itemid',width:120">项目名称</th>
                 <th data-options="field:'productid',width:100">项目审批状态</th>
                 <th data-options="field:'listprice',width:100">申请时间</th>
-                <th data-options="field:'progressvalue',width:120">项目进度</th>
+                <th data-options="field:'attr1',width:120">项目进度</th>
                 <th data-options="field:'unitcost',width:352">项目描述</th>
                 <th data-options="field:'attr1',width:120">项目成果</th>
             </tr>
